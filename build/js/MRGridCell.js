@@ -1,6 +1,5 @@
 "use strict";
 
-
 var MRGridCell = React.createClass({displayName: 'MRGridCell',
   getDefaultProps: function() {
     return {
