@@ -1,27 +1,18 @@
 "use strict";
-
-
 var MRGridCell = React.createClass({displayName: 'MRGridCell',
   getDefaultProps: function() {
     return {
       url: '#',
       title: 'Untitled Project',
       subtitle: 'Coming Soon',
-    };
-  },
-  getInitialState: function() {
-    return {
       isHovered: false,
-    };
+    }
   },
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'mr-project-grid-item ': true,
-    });
-
-    var hoverClasses = cx({
-      'mr-project-grid-item-hover-overlay': this.state.isHovered,
+      'mr-project-grid-item': true,
+      'hover-modal': this.props.isHovered,
     });
 
     return React.createElement("div", {
@@ -29,20 +20,15 @@ var MRGridCell = React.createClass({displayName: 'MRGridCell',
               onClick: this.handleClick, 
               onMouseEnter: this.handleOnMouseEnter, 
               onMouseLeave: this.handleOnMouseLeave}, 
-             React.createElement("p", null, this.props.title, " - ", this.props.subtitle), 
-             React.createElement("div", {className: hoverClasses}, " Test Test ")
+             React.createElement("p", null, this.props.title, " - ", this.props.subtitle)
            );
   },
   handleOnMouseEnter: function(e) {
-    this.setState({
-      isHovered: true,
-    });
+    this.props.isHovered = true;
     e.stopPropagation();
   },
   handleOnMouseLeave: function(e) {
-    this.setState({
-      isHovered: false,
-    });
+    this.props.isHovered = false;
     e.stopPropagation();
   },
   handleClick: function(e) {

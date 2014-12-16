@@ -1,6 +1,7 @@
 "use strict";
 
-var MRGridCell = React.createClass({
+
+var MRGridCell = React.createClass({displayName: 'MRGridCell',
   getDefaultProps: function() {
     return {
       url: '#',
@@ -16,21 +17,21 @@ var MRGridCell = React.createClass({
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
-      'mr-project-grid-item ': true,
+      'mr-project-grid-item': true,
     });
 
-    var hoverClasses = cx({
-      'mr-project-grid-item-hover-overlay': this.state.isHovered,
-    });
+    var hoverClasses = {
+      'mr-project-grid-hover-modal': this.state.isHovered,
+    };
 
-    return <div
-              className={classes}
-              onClick={this.handleClick}
-              onMouseEnter={this.handleOnMouseEnter}
-              onMouseLeave={this.handleOnMouseLeave}>
-             <p>{this.props.title} - {this.props.subtitle}</p>
-             <div className={hoverClasses}> Test Test </div>
-           </div>;
+    return React.createElement("div", {
+              className: classes, 
+              onClick: this.handleClick, 
+              onMouseEnter: this.handleOnMouseEnter, 
+              onMouseLeave: this.handleOnMouseLeave}, 
+             React.createElement("p", null, this.props.title, " - ", this.props.subtitle), 
+             React.createElement("div", {className: hoverClasses})
+           );
   },
   handleOnMouseEnter: function(e) {
     this.setState({
@@ -52,8 +53,8 @@ var MRGridCell = React.createClass({
 
 // Render component
 React.render(
-  <MRGridCell
-    title={"Phase Change"}
-    subtitle={"Collaborative Sound Creation"}
-    url={"#click"} />,
+  React.createElement(MRGridCell, {
+    title: "Phase Change", 
+    subtitle: "Collaborative Sound Creation", 
+    url: "#click"}),
   document.getElementById('container'));

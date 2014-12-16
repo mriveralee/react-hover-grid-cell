@@ -1,52 +1,32 @@
 "use strict";
 
-
 var MRGridCell = React.createClass({displayName: 'MRGridCell',
   getDefaultProps: function() {
     return {
       url: '#',
       title: 'Untitled Project',
-      subtitle: 'Coming Soon',
-    };
-  },
-  getInitialState: function() {
-    return {
-      isHovered: false,
-    };
+      subtitle: '',
+    }
   },
   render: function() {
-    var cx = React.addons.classSet;
-    var classes = cx({
-      'mr-project-grid-item ': true,
-    });
-
-    var hoverClasses = cx({
-      'mr-project-grid-item-hover-overlay': this.state.isHovered,
-    });
-
     return React.createElement("div", {
-              className: classes, 
               onClick: this.handleClick, 
               onMouseEnter: this.handleOnMouseEnter, 
               onMouseLeave: this.handleOnMouseLeave}, 
-             React.createElement("p", null, this.props.title, " - ", this.props.subtitle), 
-             React.createElement("div", {className: hoverClasses}, " Test Test ")
+             React.createElement("p", null, this.props.title, " - ", this.props.subtitle)
            );
   },
-  handleOnMouseEnter: function(e) {
-    this.setState({
-      isHovered: true,
-    });
+  onMouseEnter: function(e) {
+    console.log("enter--:" + e);
     e.stopPropagation();
   },
   handleOnMouseLeave: function(e) {
-    this.setState({
-      isHovered: false,
-    });
+    console.log("leave--:" + e);
     e.stopPropagation();
   },
   handleClick: function(e) {
-    location.href = this.props.url;
+    console.log("click");
+    location.href = this.props.url + Math.random();
     e.stopPropagation();
   }
 });
