@@ -1,0 +1,2 @@
+# Run JSX Complier with directory watching
+jsx js/ build/js --watch
