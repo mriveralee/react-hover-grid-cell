@@ -1,2 +1,6 @@
 # Run JSX Complier with directory watching
 jsx js/ build/js --watch
+
+
+# CSS Slide Animation
+http://codepen.io/dangvanthanh/pen/BsDbg
