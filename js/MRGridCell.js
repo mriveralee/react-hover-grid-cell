@@ -3,19 +3,22 @@
 // The Grid Cell Image
 // TODO: Add cropping & centering of image
 var MRGridCellImage = React.createClass({
+  propTypes: {
+    imageSrc: React.PropTypes.string.isRequired,
+  },
   getDefaultProps: function() {
     return {
-      src: '',
+      imageSrc: '',
     };
   },
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
       'mr-project-grid-item-image': true,
-      'hidden': (!this.props.src || this.props.src.length == 0),
+      'hidden': (!this.props.imageSrc || this.props.imageSrc.length == 0),
     });
     return (
-      <img className={classes} src={this.props.src} />
+      <img className={classes} src={this.props.imageSrc} />
     );
   },
 });
@@ -131,7 +134,7 @@ var MRGridCell = React.createClass({
               onClick={this.handleClick}
               onMouseEnter={this.handleOnMouseEnter}
               onMouseLeave={this.handleOnMouseLeave}>
-              <MRGridCellImage src={this.props.imageSrc} />
+              <MRGridCellImage imageSrc={this.props.imageSrc} />
               <MRGridCellInfoSlider
                 title={this.props.title}
                 subtitle={this.props.subtitle}

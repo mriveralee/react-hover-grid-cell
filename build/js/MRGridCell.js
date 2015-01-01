@@ -1,26 +1,30 @@
 "use strict";
 
 // The Grid Cell Image
-// TODO: Add cropping of image
+// TODO: Add cropping & centering of image
 var MRGridCellImage = React.createClass({displayName: 'MRGridCellImage',
+  propTypes: {
+    imageSrc: React.PropTypes.string.isRequired,
+  },
   getDefaultProps: function() {
     return {
-      src: '',
+      imageSrc: '',
     };
   },
   render: function() {
     var cx = React.addons.classSet;
     var classes = cx({
       'mr-project-grid-item-image': true,
-      'hidden': (!this.props.src || this.props.src.length == 0),
+      'hidden': (!this.props.imageSrc || this.props.imageSrc.length == 0),
     });
     return (
-      React.createElement("img", {className: classes, src: this.props.src})
+      React.createElement("img", {className: classes, src: this.props.imageSrc})
     );
   },
 });
 
 // The Title line
+// TODO: Extract general title class for the title and subtitle & pass in class?
 var MRGridCellTitle = React.createClass({displayName: 'MRGridCellTitle',
   getDefaultProps: function() {
     return {
@@ -130,7 +134,7 @@ var MRGridCell = React.createClass({displayName: 'MRGridCell',
               onClick: this.handleClick, 
               onMouseEnter: this.handleOnMouseEnter, 
               onMouseLeave: this.handleOnMouseLeave}, 
-              React.createElement(MRGridCellImage, {src: this.props.imageSrc}), 
+              React.createElement(MRGridCellImage, {imageSrc: this.props.imageSrc}), 
               React.createElement(MRGridCellInfoSlider, {
                 title: this.props.title, 
                 subtitle: this.props.subtitle, 
