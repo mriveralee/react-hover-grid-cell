@@ -129,17 +129,19 @@ var MRGridCell = React.createClass({displayName: 'MRGridCell',
       'mr-project-grid-item ': true,
     });
 
-    return React.createElement("div", {
-              className: classes, 
-              onClick: this.handleClick, 
-              onMouseEnter: this.handleOnMouseEnter, 
-              onMouseLeave: this.handleOnMouseLeave}, 
-              React.createElement(MRGridCellImage, {imageSrc: this.props.imageSrc}), 
-              React.createElement(MRGridCellInfoSlider, {
-                title: this.props.title, 
-                subtitle: this.props.subtitle, 
-                isHovered: this.state.isHovered})
-            );
+    return (
+      React.createElement("div", {
+        className: classes, 
+        onClick: this.handleClick, 
+        onMouseEnter: this.handleOnMouseEnter, 
+        onMouseLeave: this.handleOnMouseLeave}, 
+        React.createElement(MRGridCellImage, {imageSrc: this.props.imageSrc}), 
+        React.createElement(MRGridCellInfoSlider, {
+          title: this.props.title, 
+          subtitle: this.props.subtitle, 
+          isHovered: this.state.isHovered})
+      )
+    );
   }
 });
 

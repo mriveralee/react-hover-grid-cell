@@ -1,5 +1,17 @@
+$font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+$primary-title-color: pink;
+$small-font-size: 16px;
+
+$secondary-title-color: white;
+$medium-font-size: 18px;
+
+$mr-project-grid-item-text-padding: 10px;
+
+
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-family;
   font-size: 14px;
 }
 
@@ -20,19 +32,19 @@ body {
 .mr-project-grid-item-title {
   position: relative;
   width: calc(100% - 2 * 10px);
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 18px;
-  color: white;
+  padding-left: $mr-project-grid-item-text-padding;
+  padding-right: $mr-project-grid-item-text-padding;
+  font-size: $medium-font-size;
+  color: $primary-title-color;
 }
 
 .mr-project-grid-item-subtitle {
   position: relative;
   width: calc(100% - 2 * 10px);
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: 16px;
-  color: pink;
+  padding-left: $mr-project-grid-item-text-padding;
+  padding-right: $mr-project-grid-item-text-padding;
+  font-size: $small-font-size;
+  color: $secondary-title-color;
 }
 
 .mr-project-grid-item-info-slider {
@@ -50,6 +62,7 @@ body {
 }
 
 .mr-project-grid-item-info-slider.hovered {
+  transition: .5s cubic-bezier(0, 1, 0.5, 1);
   transform: translateY(0);
   -moz-transform: translateY(0); /* Mozilla */
   -ms-transform: translateY(0); /* IE 9 */
@@ -60,9 +73,9 @@ body {
   width: 300px;
   height: 300px;
   cursor: pointer;
-  margin-left: 7px !important;
-  margin-right: 7px !important;
-  margin-bottom: 14px !important;
+  margin-left: 7px;
+  margin-right: 7px;
+  margin-bottom: 14px;
   border-top: 4px solid lightgrey;
   overflow: hidden;
 }

@@ -1,6 +1,8 @@
 # Run JSX Complier with directory watching
 jsx js/ build/js --watch
 
+# compile sass
+sass --watch --poll --scss stylesheets/scss:stylesheets/css
 
 # CSS Slide Animation
 http://codepen.io/dangvanthanh/pen/BsDbg
