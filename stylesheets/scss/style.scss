@@ -1,22 +1,37 @@
+// Imports
+@import "bourbon/bourbon";
+
+// Variables
 $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+$xsmall-font-size: 14px;
+$small-font-size: 16px;
+$medium-font-size: 18px;
+$large-font-size: 20px;
+$xlarge-font-size: 22px;
 
 $primary-title-color: pink;
-$small-font-size: 16px;
-
 $secondary-title-color: white;
-$medium-font-size: 18px;
 
+$light-border-color: lightgray;
+
+$mr-project-grid-item-height: 300px;
+$mr-project-grid-item-width: 300px;
 $mr-project-grid-item-text-padding: 10px;
+$mr-project-grid-item-margin: 7px;
+$mr-project-grid-item-background-color: gray;
 
+// Transitions
+$mr-project-grid-transition: all .5s cubic-bezier(0, 1, 0.5, 1);
 
+// Transform
+$mr-project-grid-item-info-slider-transform-slide-down: translateY(75%);
+$mr-project-grid-item-info-slider-transform-slide-up: translateY(0%);
+
+// Styles
 body {
   font-family: $font-family;
-  font-size: 14px;
-}
-
-.hidden {
-  display: none;
+  font-size: $xsmall-font-size;
 }
 
 .mr-project-grid-item-image {
@@ -31,7 +46,6 @@ body {
 
 .mr-project-grid-item-title {
   position: relative;
-  width: calc(100% - 2 * 10px);
   padding-left: $mr-project-grid-item-text-padding;
   padding-right: $mr-project-grid-item-text-padding;
   font-size: $medium-font-size;
@@ -40,7 +54,6 @@ body {
 
 .mr-project-grid-item-subtitle {
   position: relative;
-  width: calc(100% - 2 * 10px);
   padding-left: $mr-project-grid-item-text-padding;
   padding-right: $mr-project-grid-item-text-padding;
   font-size: $small-font-size;
@@ -51,31 +64,24 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  padding-top:10px;
-  background-color: gray;
+  padding-top: 10px;
+  background-color: $mr-project-grid-item-background-color;
   opacity: 0.9;
-  transition: .5s cubic-bezier(0, 1, 0.5, 1);
-  transform: translateY(75%);
-  -moz-transform: translateY(75%); /* Mozilla */
-  -ms-transform: translateY(75%); /* IE 9 */
-  -webkit-transform: translateY(75%); /* Chrome, Safari, Opera */
+  @include transition($mr-project-grid-transition);
+  @include transform($mr-project-grid-item-info-slider-transform-slide-down);
 }
 
 .mr-project-grid-item-info-slider.hovered {
-  transition: .5s cubic-bezier(0, 1, 0.5, 1);
-  transform: translateY(0);
-  -moz-transform: translateY(0); /* Mozilla */
-  -ms-transform: translateY(0); /* IE 9 */
-  -webkit-transform: translateY(0); /* Chrome, Safari, Opera */
+  @include transform($mr-project-grid-item-info-slider-transform-slide-up);
 }
 
 .mr-project-grid-item {
-  width: 300px;
-  height: 300px;
+  width: $mr-project-grid-item-width;
+  height: $mr-project-grid-item-height;
+  margin-left: $mr-project-grid-item-margin;
+  margin-right: $mr-project-grid-item-margin;
+  margin-bottom: 2 * $mr-project-grid-item-margin;
+  border-top: 4px solid $light-border-color;
   cursor: pointer;
-  margin-left: 7px;
-  margin-right: 7px;
-  margin-bottom: 14px;
-  border-top: 4px solid lightgrey;
   overflow: hidden;
 }
