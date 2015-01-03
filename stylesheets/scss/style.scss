@@ -2,7 +2,15 @@
 @import "bourbon/bourbon";
 
 // Colors
-$background-light-gray-color: #E2E2E2;
+$white-color: #fff;
+$light-gray: #E2E2E2;
+
+$light-border-color: $light-gray;
+$light-background-color: $white-color;
+$body-background-color: $light-gray;
+
+$primary-title-color: pink;
+$secondary-title-color: gray;
 
 // Variables
 $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -12,13 +20,6 @@ $small-font-size: 16px;
 $medium-font-size: 18px;
 $large-font-size: 20px;
 $xlarge-font-size: 22px;
-
-$primary-title-color: pink;
-$secondary-title-color: gray;
-
-$light-border-color: lightgray;
-
-$body-background-color: $background-light-gray-color;
 
 // MR Project Grid Item
 $mr-project-grid-item-height: 265px;
@@ -69,7 +70,7 @@ body {
 }
 
 .mr-project-grid-item-modal-hover-view.hovered {
-  background: #fff;
+  background: $light-background-color;
   opacity: 0.8;
 }
 
@@ -77,11 +78,10 @@ body {
   position: relative;
   width: 100%;
   vertical-align: middle;
-  background-color: #FFF;
+  background-color: $light-background-color;
 }
 
 .mr-project-grid-item-image.hovered {
-
 }
 
 .mr-project-grid-item-text-truncation {
@@ -114,7 +114,7 @@ body {
   height: inherit;
   padding-top: $mr-project-grid-item-info-slider-padding;
   padding-bottom: $mr-project-grid-item-info-slider-padding;
-  background-color: #fff;
+  background-color: $light-background-color;
   @include transition($mr-project-grid-item-info-slider-transition);
 
   overflow: hidden;
