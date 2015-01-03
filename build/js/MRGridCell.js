@@ -1,24 +1,49 @@
 "use strict";
 
+var cx = React.addons.classSet;
+
+// The Grid Modal Hover View
+var MRGridCellModalHoverView = React.createClass({displayName: 'MRGridCellModalHoverView',
+  propTypes: {
+    isVisible: React.PropTypes.bool.isRequired,
+  },
+  getDefaultProps: function() {
+    return {
+      isVisible: false,
+    };
+  },
+  render: function() {
+    var classes = cx({
+      'mr-project-grid-item-modal-hover-view': true,
+      'hovered': this.props.isVisible,
+    });
+    return (
+      React.createElement("div", {className: classes}, 
+        this.props.children
+      )
+    );
+  },
+});
+
 // The Grid Cell Image
-// TODO: Add cropping & centering of image
 var MRGridCellImage = React.createClass({displayName: 'MRGridCellImage',
   propTypes: {
     imageSrc: React.PropTypes.string.isRequired,
   },
   getDefaultProps: function() {
     return {
-      imageSrc: '',
+      isHovered: false,
     };
   },
   render: function() {
-    var cx = React.addons.classSet;
     var classes = cx({
       'mr-project-grid-item-image': true,
-      'hidden': (!this.props.imageSrc || this.props.imageSrc.length == 0),
+      'hovered': this.props.isHovered,
     });
     return (
-      React.createElement("img", {className: classes, src: this.props.imageSrc})
+      React.createElement(MRGridCellModalHoverView, {isVisible: this.props.isHovered}, 
+        React.createElement("img", {className: classes, src: this.props.imageSrc})
+      )
     );
   },
 });
@@ -29,13 +54,12 @@ var MRGridCellTitle = React.createClass({displayName: 'MRGridCellTitle',
   getDefaultProps: function() {
     return {
       title: '',
+      shouldTruncate: false,
     }
   },
   render: function() {
-    var cx = React.addons.classSet;
     var classes = cx({
-      'mr-project-grid-item-text': true,
-      'mr-project-grid-item-text-truncation': true,
+      'mr-project-grid-item-text-truncation': this.props.shouldTruncate,
       'mr-project-grid-item-title': true,
     });
     return (
@@ -49,13 +73,12 @@ var MRGridCellSubtitle = React.createClass({displayName: 'MRGridCellSubtitle',
   getDefaultProps: function() {
     return {
       subtitle: '',
+      shouldTruncate: false,
     };
   },
   render: function() {
-    var cx = React.addons.classSet;
     var classes = cx({
-      'mr-project-grid-item-text': true,
-      'mr-project-grid-item-text-truncation': true,
+      'mr-project-grid-item-text-truncation': this.props.shouldTruncate,
       'mr-project-grid-item-subtitle' : true,
     });
 
@@ -64,7 +87,6 @@ var MRGridCellSubtitle = React.createClass({displayName: 'MRGridCellSubtitle',
     );
   },
 });
-
 
 // Information slider -- include background title, subtitle
 var MRGridCellInfoSlider = React.createClass({displayName: 'MRGridCellInfoSlider',
@@ -77,20 +99,22 @@ var MRGridCellInfoSlider = React.createClass({displayName: 'MRGridCellInfoSlider
     };
   },
   render: function() {
-    var cx = React.addons.classSet;
     var classes = cx({
       'mr-project-grid-item-info-slider': true,
       'hovered': this.props.isHovered,
     });
     return (
       React.createElement("div", {className: classes}, 
-        React.createElement(MRGridCellTitle, {title: this.props.title}), 
-        React.createElement(MRGridCellSubtitle, {subtitle: this.props.subtitle})
+        React.createElement(MRGridCellTitle, {
+          title: this.props.title, 
+          shouldTruncate: true}), 
+        React.createElement(MRGridCellSubtitle, {
+          subtitle: this.props.subtitle, 
+          shouldTruncate: true})
       )
     );
   },
 });
-
 
 // The Grid Cell - containing an image and information slider
 var MRGridCell = React.createClass({displayName: 'MRGridCell',
@@ -124,22 +148,23 @@ var MRGridCell = React.createClass({displayName: 'MRGridCell',
     e.stopPropagation();
   },
   render: function() {
-    var cx = React.addons.classSet;
     var classes = cx({
       'mr-project-grid-item ': true,
     });
-
+    var isHovered = this.state.isHovered;
     return (
       React.createElement("div", {
         className: classes, 
         onClick: this.handleClick, 
         onMouseEnter: this.handleOnMouseEnter, 
         onMouseLeave: this.handleOnMouseLeave}, 
-        React.createElement(MRGridCellImage, {imageSrc: this.props.imageSrc}), 
+        React.createElement(MRGridCellImage, {
+          imageSrc: this.props.imageSrc, 
+          isHovered: isHovered}), 
         React.createElement(MRGridCellInfoSlider, {
           title: this.props.title, 
           subtitle: this.props.subtitle, 
-          isHovered: this.state.isHovered})
+          isHovered: isHovered})
       )
     );
   }
@@ -150,6 +175,6 @@ React.render(
   React.createElement(MRGridCell, {
     title: "Cool New Project", 
     subtitle: "An Awesome Project Using React", 
-    imageSrc: 'http://lorempixel.com/300/300/', 
+    imageSrc: 'http://lorempixel.com/400/200/', 
     url: "#click"}),
   document.getElementById('container'));

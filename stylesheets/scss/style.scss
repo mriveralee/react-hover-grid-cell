@@ -1,6 +1,9 @@
 // Imports
 @import "bourbon/bourbon";
 
+// Colors
+$background-light-gray-color: #E2E2E2;
+
 // Variables
 $font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -11,31 +14,74 @@ $large-font-size: 20px;
 $xlarge-font-size: 22px;
 
 $primary-title-color: pink;
-$secondary-title-color: white;
+$secondary-title-color: gray;
 
 $light-border-color: lightgray;
 
-$mr-project-grid-item-height: 300px;
-$mr-project-grid-item-width: 300px;
-$mr-project-grid-item-text-padding: 10px;
+$body-background-color: $background-light-gray-color;
+
+// MR Project Grid Item
+$mr-project-grid-item-height: 265px;
+$mr-project-grid-item-width: 400px;
 $mr-project-grid-item-margin: 7px;
+$mr-project-grid-item-text-padding: 10px;
+$mr-project-grid-item-border-radius: 5px;
+
 $mr-project-grid-item-background-color: gray;
 
-// Transitions
-$mr-project-grid-transition: all .5s cubic-bezier(0, 1, 0.5, 1);
+// Item Modal Hover View
+$mr-project-grid-item-modal-hover-view-transition: all 0.1s linear;
 
-// Transform
-$mr-project-grid-item-info-slider-transform-slide-down: translateY(75%);
-$mr-project-grid-item-info-slider-transform-slide-up: translateY(0%);
+// Item Image
+$mr-project-grid-item-image-transition: all 0.1s linear;
+$mr-project-grid-item-image-filter-blur-start: blur(0px);
+$mr-project-grid-item-image-filter-blur-end: blur(4px);
+
+// Info Slider
+$mr-project-grid-item-info-slider-padding: 10px;
+$mr-project-grid-item-info-slider-bg-gradient-start-color: rgba(25,25,25,0.9); //#111111;
+$mr-project-grid-item-info-slider-bg-gradient-end-color: rgba(25,25,25,0.2); //#6A6A6A;
+$mr-project-grid-item-info-slider-transition: all 0.5s ease;
+$mr-project-grid-item-info-slider-transform-slide-down: translateY(0%);
+$mr-project-grid-item-info-slider-transform-slide-up: translateY(-60%);
 
 // Styles
 body {
   font-family: $font-family;
   font-size: $xsmall-font-size;
+  background: $body-background-color;
+}
+
+// Border Radius Fix
+.border-radius-transition-fix {
+  -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+}
+
+.container {
+  margin: 0 auto;
+}
+
+.mr-project-grid-item-modal-hover-view {
+  width: 100%;
+  display: block;
+  background: transparent;
+  @include transition($mr-project-grid-item-modal-hover-view-transition);
+}
+
+.mr-project-grid-item-modal-hover-view.hovered {
+  background: #fff;
+  opacity: 0.8;
 }
 
 .mr-project-grid-item-image {
-  position: absolute;
+  position: relative;
+  width: 100%;
+  vertical-align: middle;
+  background-color: #FFF;
+}
+
+.mr-project-grid-item-image.hovered {
+
 }
 
 .mr-project-grid-item-text-truncation {
@@ -44,31 +90,34 @@ body {
   overflow: hidden;
 }
 
-.mr-project-grid-item-title {
+.mr-project-grid-item-text {
   position: relative;
   padding-left: $mr-project-grid-item-text-padding;
   padding-right: $mr-project-grid-item-text-padding;
+}
+
+.mr-project-grid-item-title {
+  @extend .mr-project-grid-item-text;
   font-size: $medium-font-size;
   color: $primary-title-color;
 }
 
 .mr-project-grid-item-subtitle {
-  position: relative;
-  padding-left: $mr-project-grid-item-text-padding;
-  padding-right: $mr-project-grid-item-text-padding;
+  @extend .mr-project-grid-item-text;
   font-size: $small-font-size;
   color: $secondary-title-color;
 }
 
 .mr-project-grid-item-info-slider {
   position: relative;
-  width: 100%;
-  height: 100%;
-  padding-top: 10px;
-  background-color: $mr-project-grid-item-background-color;
-  opacity: 0.9;
-  @include transition($mr-project-grid-transition);
-  @include transform($mr-project-grid-item-info-slider-transform-slide-down);
+  width: inherit;
+  height: inherit;
+  padding-top: $mr-project-grid-item-info-slider-padding;
+  padding-bottom: $mr-project-grid-item-info-slider-padding;
+  background-color: #fff;
+  @include transition($mr-project-grid-item-info-slider-transition);
+
+  overflow: hidden;
 }
 
 .mr-project-grid-item-info-slider.hovered {
@@ -76,12 +125,17 @@ body {
 }
 
 .mr-project-grid-item {
+  @extend .border-radius-transition-fix;
   width: $mr-project-grid-item-width;
   height: $mr-project-grid-item-height;
   margin-left: $mr-project-grid-item-margin;
   margin-right: $mr-project-grid-item-margin;
   margin-bottom: 2 * $mr-project-grid-item-margin;
-  border-top: 4px solid $light-border-color;
+  //border-bottom: 4px solid $light-border-color;
+  @include border-top-radius($mr-project-grid-item-border-radius);
+  @include border-right-radius($mr-project-grid-item-border-radius);
+  @include border-bottom-radius($mr-project-grid-item-border-radius);
+  @include border-left-radius($mr-project-grid-item-border-radius);
   cursor: pointer;
   overflow: hidden;
 }
